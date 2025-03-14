@@ -9,13 +9,13 @@ export default function PostForm({ post }) {
   const { register, handleSubmit, watch, setValue, getValues, control } =
     useForm({
       defaultValues: {
-        title: post.title || "",
-        content: post.content || "",
-        slug: post.slug || "",
-        status: post.status || "active",
+        title: post?.title || "",
+        content: post?.content || "",
+        slug: post?.slug || "",
+        status: post?.status || "active",
       },
     });
-  const userData = useSelector((state) => state.user.userData);
+  const userData = useSelector((state) => state.auth.userData);
   const submit = async (data) => {
     // update post
     if (post) {
