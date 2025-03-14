@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { login } from "../store/authSlice";
 import authService from "../appwrite/auth";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router";
 import { Button, Input, Logo } from "./index";
 import { useForm } from "react-hook-form";
 export default function Signup() {
@@ -14,10 +14,13 @@ export default function Signup() {
     setError("");
     try {
       const userData = await authService.createAccount(data);
+      console.log("userData", userData);
       if (userData) {
         const userData = await authService.getCurrentUser();
         if (userData) dispatch(login(userData));
         navigate("/");
+      } else {
+        setError(error.message);
       }
     } catch (error) {
       setError(error.message);
